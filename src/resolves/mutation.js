@@ -110,7 +110,7 @@ module.exports = {
       throw new AuthenticationError();
     }
 
-    let noteCheck = models.Note.findById(id);
+    let noteCheck = await models.Note.findById(id);
     console.log('favoritedBy=======>', noteCheck.favoritedBy);
     let hasUser = -1;
 

@@ -37,9 +37,9 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => {
     const token = req.headers.authorization;
-    console.log(token);
+    // console.log(token);
     const user = getUser(token);
-    console.log(user);
+    console.log('user======>', user);
     return { models, user };
   }
 });

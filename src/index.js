@@ -1,6 +1,8 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { ApolloServer } = require('apollo-server-express');
+const helmet = require('helmet');
+const cors = require('cors');
 require('dotenv').config();
 
 const db = require('./db');
@@ -13,6 +15,10 @@ const DB_HOST = process.env.DB_HOST;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const app = express();
+
+app.use(helmet());
+
+app.use(cors());
 
 db.connect(DB_HOST);
 
@@ -31,9 +37,9 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => {
     const token = req.headers.authorization;
-    console.log(token);
+    // console.log(token);
     const user = getUser(token);
-    console.log(user);
+    console.log('user======>', user);
     return { models, user };
   }
 });
